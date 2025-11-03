@@ -154,7 +154,7 @@ const Hero: FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '120px 40px 80px',
+            padding: 'clamp(80px, 15vh, 120px) clamp(1rem, 5vw, 40px) clamp(40px, 10vh, 80px)',
             background: 'linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 100%)',
             position: 'relative',
             overflow: 'hidden',
@@ -168,15 +168,17 @@ const Hero: FC = () => {
                 zIndex: 0,
             }} />
             
-            {/* Creative liquid morphing blobs */}
-            <LiquidMorph size={500} color="rgba(255, 255, 255, 0.015)" position={{ top: '20%', left: '15%' }} />
-            <LiquidMorph size={600} color="rgba(255, 255, 255, 0.012)" position={{ bottom: '25%', right: '20%' }} />
-            <LiquidMorph size={400} color="rgba(255, 255, 255, 0.01)" position={{ top: '60%', left: '50%' }} />
-            
-            {/* Glowing orbs */}
-            <GlowOrb x={25} y={30} size={250} />
-            <GlowOrb x={75} y={70} size={300} />
-            <GlowOrb x={50} y={50} size={200} />
+            {/* Creative liquid morphing blobs - reduced on mobile */}
+            <div style={{ display: window.innerWidth > 768 ? 'block' : 'none' }}>
+                <LiquidMorph size={500} color="rgba(255, 255, 255, 0.015)" position={{ top: '20%', left: '15%' }} />
+                <LiquidMorph size={600} color="rgba(255, 255, 255, 0.012)" position={{ bottom: '25%', right: '20%' }} />
+                <LiquidMorph size={400} color="rgba(255, 255, 255, 0.01)" position={{ top: '60%', left: '50%' }} />
+                
+                {/* Glowing orbs */}
+                <GlowOrb x={25} y={30} size={250} />
+                <GlowOrb x={75} y={70} size={300} />
+                <GlowOrb x={50} y={50} size={200} />
+            </div>
             
             {/* Minimal subtle background elements */}
             <div ref={floatingElementsRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
@@ -197,6 +199,8 @@ const Hero: FC = () => {
                 textAlign: 'center',
                 position: 'relative',
                 zIndex: 2,
+                width: '100%',
+                padding: '0 clamp(1rem, 4vw, 2rem)',
             }}>
                 <MagneticField strength={0.2}>
                     <CreativeTextReveal direction="up" delay={0.2}>
@@ -204,39 +208,43 @@ const Hero: FC = () => {
                             ref={headlineRef} 
                             className="animated-headline"
                             onMouseEnter={(e) => {
-                                const words = e.currentTarget.querySelectorAll('span');
-                                words.forEach((word) => {
-                                    // Creative text effect with magnetic response
-                                    gsap.to(word, {
-                                        color: 'rgba(255, 255, 255, 0.9)',
-                                        textShadow: '0 0 30px rgba(255, 255, 255, 0.4)',
-                                        scale: 1.05,
-                                        y: -5,
-                                        duration: 0.5,
-                                        ease: 'power2.out',
+                                if (typeof window !== 'undefined' && window.innerWidth > 768) {
+                                    const words = e.currentTarget.querySelectorAll('span');
+                                    words.forEach((word) => {
+                                        // Creative text effect with magnetic response
+                                        gsap.to(word, {
+                                            color: 'rgba(255, 255, 255, 0.9)',
+                                            textShadow: '0 0 30px rgba(255, 255, 255, 0.4)',
+                                            scale: 1.05,
+                                            y: -5,
+                                            duration: 0.5,
+                                            ease: 'power2.out',
+                                        });
                                     });
-                                });
+                                }
                             }}
                             onMouseLeave={(e) => {
-                                const words = e.currentTarget.querySelectorAll('span');
-                                words.forEach((word) => {
-                                    gsap.to(word, {
-                                        color: '#FFFFFF',
-                                        textShadow: 'none',
-                                        scale: 1,
-                                        y: 0,
-                                        duration: 0.5,
-                                        ease: 'power2.out',
+                                if (typeof window !== 'undefined' && window.innerWidth > 768) {
+                                    const words = e.currentTarget.querySelectorAll('span');
+                                    words.forEach((word) => {
+                                        gsap.to(word, {
+                                            color: '#FFFFFF',
+                                            textShadow: 'none',
+                                            scale: 1,
+                                            y: 0,
+                                            duration: 0.5,
+                                            ease: 'power2.out',
+                                        });
                                     });
-                                });
+                                }
                             }}
                             style={{
-                                fontSize: 'clamp(4rem, 12vw, 10rem)',
+                                fontSize: 'clamp(2rem, 10vw, 6rem)',
                                 fontWeight: 800,
                                 lineHeight: 1.1,
                                 letterSpacing: '-0.02em',
                                 color: '#FFFFFF',
-                                marginBottom: '2rem',
+                                marginBottom: 'clamp(1rem, 3vw, 2rem)',
                                 fontFamily: 'Inter, sans-serif',
                                 cursor: 'default',
                             }}
@@ -248,32 +256,32 @@ const Hero: FC = () => {
                     </CreativeTextReveal>
                 </MagneticField>
                 <p ref={subheadingRef} style={{
-                    fontSize: '1.25rem',
+                    fontSize: 'clamp(1rem, 3vw, 1.25rem)',
                     color: '#999999',
                     lineHeight: 1.8,
                     maxWidth: '700px',
-                    margin: '0 auto 2rem',
+                    margin: '0 auto clamp(1.5rem, 4vw, 2rem)',
                 }}>
                     Seamlessly connect with verified local freelancers for device repair, cleaning, and home installation. Get instant quotes, track your service in real-time, and pay securely only when satisfied.
                 </p>
                 <div style={{
                     display: 'flex',
-                    gap: '2rem',
+                    gap: 'clamp(1rem, 3vw, 2rem)',
                     justifyContent: 'center',
                     flexWrap: 'wrap',
-                    marginBottom: '4rem',
+                    marginBottom: 'clamp(2rem, 6vw, 4rem)',
                 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#FFFFFF' }}>
-                        <span style={{ fontSize: '1.125rem', fontWeight: 600 }}>✓</span>
-                        <span style={{ fontSize: '1rem', color: '#CCCCCC' }}>24/7 Availability</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#FFFFFF', fontSize: 'clamp(0.875rem, 2vw, 1rem)' }}>
+                        <span style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', fontWeight: 600 }}>✓</span>
+                        <span style={{ color: '#CCCCCC' }}>24/7 Availability</span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#FFFFFF' }}>
-                        <span style={{ fontSize: '1.125rem', fontWeight: 600 }}>✓</span>
-                        <span style={{ fontSize: '1rem', color: '#CCCCCC' }}>Verified Professionals</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#FFFFFF', fontSize: 'clamp(0.875rem, 2vw, 1rem)' }}>
+                        <span style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', fontWeight: 600 }}>✓</span>
+                        <span style={{ color: '#CCCCCC' }}>Verified Professionals</span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#FFFFFF' }}>
-                        <span style={{ fontSize: '1.125rem', fontWeight: 600 }}>✓</span>
-                        <span style={{ fontSize: '1rem', color: '#CCCCCC' }}>Secure Payment</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#FFFFFF', fontSize: 'clamp(0.875rem, 2vw, 1rem)' }}>
+                        <span style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', fontWeight: 600 }}>✓</span>
+                        <span style={{ color: '#CCCCCC' }}>Secure Payment</span>
                     </div>
                 </div>
                 <ElegantHover intensity={0.02}>

@@ -6,6 +6,9 @@ const MagneticCursor: React.FC = () => {
     const followerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // Disable on mobile devices
+        if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
+        
         const cursor = cursorRef.current;
         const follower = followerRef.current;
         if (!cursor || !follower) return;
@@ -73,6 +76,11 @@ const MagneticCursor: React.FC = () => {
             });
         };
     }, []);
+
+    // Hide on mobile
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+        return null;
+    }
 
     return (
         <>

@@ -159,8 +159,8 @@ const Stats: FC = () => {
             }}>
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                    gap: '4rem',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                    gap: 'clamp(2rem, 5vw, 4rem)',
                     textAlign: 'center',
                 }}>
                     {stats.map((stat, index) => (
@@ -171,7 +171,7 @@ const Stats: FC = () => {
                                         statRefs.current[index] = el;
                                     }}
                                     style={{
-                                        padding: '2rem',
+                                        padding: 'clamp(1.5rem, 3vw, 2rem)',
                                         background: 'rgba(255, 255, 255, 0.03)',
                                         border: '1px solid rgba(255, 255, 255, 0.1)',
                                         borderRadius: '16px',
@@ -224,21 +224,21 @@ const Stats: FC = () => {
                                     }}
                                 >
                             <div style={{
-                                fontSize: 'clamp(3rem, 8vw, 5rem)',
+                                fontSize: 'clamp(2rem, 6vw, 4rem)',
                                 fontWeight: 800,
                                 color: '#FFD700',
                                 lineHeight: 1,
-                                marginBottom: '1rem',
+                                marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
                                 display: 'flex',
                                 alignItems: 'baseline',
                                 justifyContent: 'center',
                                 gap: '0.25rem',
                             }}>
                                 <span data-value>{stat.value}</span>
-                                <span style={{ fontSize: '2rem', color: '#FFFFFF' }}>{stat.suffix}</span>
+                                <span style={{ fontSize: 'clamp(1.25rem, 3vw, 2rem)', color: '#FFFFFF' }}>{stat.suffix}</span>
                             </div>
                             <div style={{
-                                fontSize: '1.125rem',
+                                fontSize: 'clamp(0.875rem, 2vw, 1.125rem)',
                                 color: 'rgba(255, 255, 255, 0.8)',
                                 fontWeight: 600,
                             }}>

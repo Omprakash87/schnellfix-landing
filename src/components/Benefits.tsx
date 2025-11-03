@@ -109,7 +109,7 @@ const Benefits: FC = () => {
 
     return (
         <section ref={sectionRef} id="benefits" style={{
-            padding: '10rem 40px',
+            padding: 'clamp(4rem, 15vw, 10rem) clamp(1rem, 5vw, 40px)',
             background: '#1A1A1A',
         }}>
             <div style={{
@@ -118,15 +118,15 @@ const Benefits: FC = () => {
             }}>
                     <div style={{
                         textAlign: 'center',
-                        marginBottom: '6rem',
+                        marginBottom: 'clamp(3rem, 8vw, 6rem)',
                     }}>
                         <SmoothReveal direction="up" delay={0.1}>
                             <h2 style={{
-                                fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+                                fontSize: 'clamp(1.75rem, 8vw, 4rem)',
                                 fontWeight: 800,
                                 lineHeight: 1.1,
                                 letterSpacing: '-0.05em',
-                                marginBottom: '1.5rem',
+                                marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
                                 color: '#FFFFFF',
                                 cursor: 'default',
                             }}>
@@ -134,21 +134,22 @@ const Benefits: FC = () => {
                             </h2>
                         </SmoothReveal>
                     <p style={{
-                        fontSize: '1.25rem',
+                        fontSize: 'clamp(1rem, 3vw, 1.25rem)',
                         color: '#999999',
                         maxWidth: '700px',
                         margin: '0 auto',
                         lineHeight: 1.8,
+                        padding: '0 clamp(1rem, 4vw, 2rem)',
                     }}>
                         Experience the complete SchnellFix advantage with features designed for your convenience
                     </p>
-                </div>
+                    </div>
 
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                    gap: '2rem',
-                }}>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                        gap: 'clamp(1.5rem, 4vw, 2rem)',
+                    }}>
                     {benefits.map((benefit, index) => (
                         <SmoothReveal key={index} direction="left" delay={index * 0.1}>
                             <ElegantHover intensity={0.01}>
@@ -156,10 +157,12 @@ const Benefits: FC = () => {
                                     ref={(el) => {
                                         benefitRefs.current[index] = el;
                                     }}
+                                    className="benefit-item"
                                     style={{
                                         display: 'flex',
-                                        gap: '1.5rem',
-                                        padding: '2rem',
+                                        flexDirection: 'row',
+                                        gap: 'clamp(1rem, 3vw, 1.5rem)',
+                                        padding: 'clamp(1.5rem, 4vw, 2rem)',
                                         background: 'rgba(255, 255, 255, 0.02)',
                                         border: '1px solid rgba(255, 255, 255, 0.08)',
                                         borderRadius: '16px',
@@ -218,14 +221,15 @@ const Benefits: FC = () => {
                                 flexShrink: 0,
                                 color: '#FFD700',
                                 marginTop: '0.25rem',
+                                alignSelf: 'flex-start',
                             }}>
                                 <CheckCircle2 size={32} />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h3 style={{
-                                    fontSize: '1.25rem',
+                                    fontSize: 'clamp(1.125rem, 3vw, 1.25rem)',
                                     fontWeight: 700,
-                                    marginBottom: '0.75rem',
+                                    marginBottom: 'clamp(0.5rem, 2vw, 0.75rem)',
                                     color: '#FFFFFF',
                                 }}>
                                     {benefit.title}
@@ -233,7 +237,7 @@ const Benefits: FC = () => {
                                 <p style={{
                                     color: 'rgba(255, 255, 255, 0.7)',
                                     lineHeight: 1.7,
-                                    fontSize: '1rem',
+                                    fontSize: 'clamp(0.875rem, 2vw, 1rem)',
                                 }}>
                                     {benefit.description}
                                 </p>

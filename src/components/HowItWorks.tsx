@@ -133,14 +133,16 @@ const HowItWorks: FC = () => {
                 }}>
                     {steps.map((step, index) => (
                         <SmoothReveal key={index} direction="left" delay={index * 0.2}>
-                            <div
+                            <div 
                                 ref={(el) => {
                                     stepsRef.current[index] = el;
                                 }}
+                                className="how-it-works-step"
                                 style={{
                                     display: 'flex',
+                                    flexDirection: 'row',
                                     alignItems: 'flex-start',
-                                    gap: '3rem',
+                                    gap: 'clamp(1.5rem, 4vw, 3rem)',
                                 }}
                             >
                             <ElegantHover intensity={0.015}>
@@ -205,15 +207,15 @@ const HowItWorks: FC = () => {
                                 <div 
                                     data-number
                                     style={{
-                                        fontSize: '4rem',
+                                        fontSize: 'clamp(2.5rem, 6vw, 4rem)',
                                         fontWeight: 800,
                                         color: '#FFFFFF',
                                         lineHeight: 1,
                                         letterSpacing: '-0.02em',
-                                        minWidth: '100px',
+                                        minWidth: 'clamp(80px, 15vw, 100px)',
                                         textAlign: 'center',
                                         background: 'rgba(255, 255, 255, 0.05)',
-                                        padding: '1rem',
+                                        padding: 'clamp(0.75rem, 2vw, 1rem)',
                                         border: '2px solid rgba(255, 255, 255, 0.1)',
                                         boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)',
                                         borderRadius: '12px',
@@ -228,8 +230,8 @@ const HowItWorks: FC = () => {
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        width: '80px',
-                                        height: '80px',
+                                        width: 'clamp(60px, 12vw, 80px)',
+                                        height: 'clamp(60px, 12vw, 80px)',
                                         background: 'rgba(255, 255, 255, 0.05)',
                                         borderRadius: '50%',
                                         border: '2px solid rgba(255, 255, 255, 0.1)',
@@ -245,9 +247,9 @@ const HowItWorks: FC = () => {
                                 paddingTop: '1rem',
                             }}>
                                 <h3 style={{
-                                    fontSize: '1.75rem',
+                                    fontSize: 'clamp(1.25rem, 4vw, 1.75rem)',
                                     fontWeight: 700,
-                                    marginBottom: '0.75rem',
+                                    marginBottom: 'clamp(0.5rem, 2vw, 0.75rem)',
                                     color: '#FFFFFF',
                                 }}>
                                     {step.title}
@@ -255,7 +257,7 @@ const HowItWorks: FC = () => {
                                 <p style={{
                                     color: 'rgba(255, 255, 255, 0.7)',
                                     lineHeight: 1.8,
-                                    fontSize: '1.125rem',
+                                    fontSize: 'clamp(1rem, 3vw, 1.125rem)',
                                 }}>
                                     {step.description}
                                 </p>

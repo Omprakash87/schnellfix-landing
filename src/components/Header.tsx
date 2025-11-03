@@ -53,12 +53,12 @@ const Header: FC = () => {
             backdropFilter: 'blur(20px)',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
             zIndex: 1000,
-            padding: '1.5rem 0',
+            padding: 'clamp(1rem, 2vw, 1.5rem) 0',
         }}>
             <nav style={{
                 maxWidth: '1400px',
                 margin: '0 auto',
-                padding: '0 40px',
+                padding: '0 clamp(1rem, 4vw, 40px)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
@@ -89,7 +89,7 @@ const Header: FC = () => {
                                 });
                             }}
                             style={{
-                                fontSize: '1.25rem',
+                                fontSize: 'clamp(1rem, 3vw, 1.25rem)',
                                 fontWeight: 700,
                                 color: '#FFFFFF',
                                 letterSpacing: '-0.01em',

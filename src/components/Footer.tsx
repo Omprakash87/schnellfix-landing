@@ -40,12 +40,12 @@ const Footer: FC = () => {
                 maxWidth: '1400px',
                 margin: '0 auto',
             }}>
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: '4rem',
-                    marginBottom: '4rem',
-                }}>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                        gap: 'clamp(2rem, 5vw, 4rem)',
+                        marginBottom: 'clamp(2rem, 5vw, 4rem)',
+                    }}>
                     <div>
                         <h3 style={{
                             fontSize: '1.5rem',

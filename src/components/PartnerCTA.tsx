@@ -54,7 +54,7 @@ const PartnerCTA: FC = () => {
 
     return (
         <section ref={sectionRef} style={{
-            padding: '10rem 40px',
+            padding: 'clamp(4rem, 15vw, 10rem) clamp(1rem, 5vw, 40px)',
             background: '#3A3A3A',
             color: '#FFFFFF',
             textAlign: 'center',
@@ -89,12 +89,13 @@ const PartnerCTA: FC = () => {
                             });
                         }}
                         style={{
-                            fontSize: 'clamp(2.5rem, 7vw, 5rem)',
+                            fontSize: 'clamp(1.75rem, 7vw, 4rem)',
                             fontWeight: 800,
                             letterSpacing: '-0.04em',
-                            marginBottom: '2rem',
+                            marginBottom: 'clamp(1rem, 3vw, 2rem)',
                             color: '#FFFFFF',
                             cursor: 'default',
+                            padding: '0 clamp(1rem, 4vw, 2rem)',
                         }}
                     >
                         <span style={{ display: 'block' }}>Join the Elite</span>
@@ -103,13 +104,14 @@ const PartnerCTA: FC = () => {
                     </h2>
                 </SmoothReveal>
                 <p style={{
-                    fontSize: '1.25rem',
+                    fontSize: 'clamp(1rem, 3vw, 1.25rem)',
                     color: 'rgba(255, 255, 255, 0.8)',
                     lineHeight: 1.8,
-                    marginBottom: '3rem',
+                    marginBottom: 'clamp(2rem, 5vw, 3rem)',
                     maxWidth: '700px',
                     marginLeft: 'auto',
                     marginRight: 'auto',
+                    padding: '0 clamp(1rem, 4vw, 2rem)',
                 }}>
                     Join thousands of skilled professionals who trust SchnellFix to connect them with quality service requests.
                 </p>

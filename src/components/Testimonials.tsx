@@ -172,15 +172,15 @@ const Testimonials: FC = () => {
             }}>
                     <div style={{
                         textAlign: 'center',
-                        marginBottom: '6rem',
+                        marginBottom: 'clamp(3rem, 8vw, 6rem)',
                     }}>
                         <SmoothReveal direction="up" delay={0.1}>
                             <h2 style={{
-                                fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+                                fontSize: 'clamp(1.75rem, 8vw, 4rem)',
                                 fontWeight: 800,
                                 lineHeight: 1.1,
                                 letterSpacing: '-0.05em',
-                                marginBottom: '1.5rem',
+                                marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
                                 color: '#FFFFFF',
                                 cursor: 'default',
                             }}>
@@ -188,22 +188,23 @@ const Testimonials: FC = () => {
                             </h2>
                         </SmoothReveal>
                     <p style={{
-                        fontSize: '1.25rem',
+                        fontSize: 'clamp(1rem, 3vw, 1.25rem)',
                         color: '#999999',
                         maxWidth: '700px',
                         margin: '0 auto',
                         lineHeight: 1.8,
+                        padding: '0 clamp(1rem, 4vw, 2rem)',
                     }}>
                         See what our customers have to say about their SchnellFix experience
                     </p>
-                </div>
+                    </div>
 
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                    gap: '3rem',
-                    perspective: '1000px',
-                }}>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                        gap: 'clamp(2rem, 5vw, 3rem)',
+                        perspective: '1000px',
+                    }}>
                     {testimonials.map((testimonial, index) => (
                         <SmoothReveal key={index} direction="up" delay={index * 0.15}>
                             <ElegantHover intensity={0.012}>
@@ -212,7 +213,7 @@ const Testimonials: FC = () => {
                                         testimonialRefs.current[index] = el;
                                     }}
                                     style={{
-                                        padding: '3rem',
+                                        padding: 'clamp(1.5rem, 4vw, 3rem)',
                                         background: 'rgba(255, 255, 255, 0.03)',
                                         border: '1px solid rgba(255, 255, 255, 0.1)',
                                         borderRadius: '24px',

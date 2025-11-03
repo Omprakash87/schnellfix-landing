@@ -132,7 +132,7 @@ const Features: FC = () => {
 
     return (
         <section ref={sectionRef} id="features" style={{
-            padding: '10rem 40px',
+            padding: 'clamp(4rem, 15vw, 10rem) clamp(1rem, 5vw, 40px)',
             background: '#1A1A1A',
             position: 'relative',
         }}>
@@ -142,15 +142,15 @@ const Features: FC = () => {
             }}>
                     <div style={{
                         textAlign: 'center',
-                        marginBottom: '6rem',
+                        marginBottom: 'clamp(3rem, 8vw, 6rem)',
                     }}>
                         <SmoothReveal direction="up" delay={0.1}>
                             <h2 style={{
-                                fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+                                fontSize: 'clamp(1.75rem, 8vw, 4rem)',
                                 fontWeight: 800,
                                 lineHeight: 1.1,
                                 letterSpacing: '-0.05em',
-                                marginBottom: '1.5rem',
+                                marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
                                 color: '#FFFFFF',
                                 cursor: 'default',
                             }}>
@@ -158,21 +158,22 @@ const Features: FC = () => {
                             </h2>
                         </SmoothReveal>
                     <p style={{
-                        fontSize: '1.25rem',
+                        fontSize: 'clamp(1rem, 3vw, 1.25rem)',
                         color: '#999999',
                         maxWidth: '700px',
                         margin: '0 auto',
                         lineHeight: 1.8,
+                        padding: '0 clamp(1rem, 4vw, 2rem)',
                     }}>
                         Experience the future of home and device services with cutting-edge technology and trusted professionals.
                     </p>
-                </div>
+                    </div>
 
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                    gap: '2.5rem',
-                }}>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                        gap: 'clamp(1.5rem, 4vw, 2.5rem)',
+                    }}>
                     {features.map((feature, index) => (
                         <AdvancedParallax key={index} speed={0.2 + index * 0.05} direction="up">
                             <SmoothReveal direction="up" delay={index * 0.1}>
@@ -183,7 +184,7 @@ const Features: FC = () => {
                                                 featuresRef.current[index] = el;
                                             }}
                                             style={{
-                                                padding: '3rem 2rem',
+                                                padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2rem)',
                                                 background: 'rgba(255, 255, 255, 0.02)',
                                                 border: '1px solid rgba(255, 255, 255, 0.08)',
                                                 borderRadius: '20px',
@@ -280,19 +281,19 @@ const Features: FC = () => {
                             }} className="hover-gradient" />
                             
                             <div data-icon style={{
-                                marginBottom: '1.5rem',
+                                marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
                                 color: feature.color,
                                 display: 'inline-flex',
-                                padding: '1rem',
+                                padding: 'clamp(0.75rem, 2vw, 1rem)',
                                 background: `${feature.color}1A`,
                                 borderRadius: '12px',
                             }}>
                                 {feature.icon}
                             </div>
                             <h3 style={{
-                                fontSize: '1.5rem',
+                                fontSize: 'clamp(1.125rem, 3vw, 1.5rem)',
                                 fontWeight: 700,
-                                marginBottom: '1rem',
+                                marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
                                 color: '#FFFFFF',
                             }}>
                                 {feature.title}
@@ -300,10 +301,10 @@ const Features: FC = () => {
                             <p style={{
                                 color: 'rgba(255, 255, 255, 0.7)',
                                 lineHeight: 1.7,
-                                fontSize: '1rem',
+                                fontSize: 'clamp(0.875rem, 2vw, 1rem)',
                             }}>
                                 {feature.description}
-                                </p>
+                            </p>
                                         </div>
                                     </ElegantHover>
                                 </MagneticField>

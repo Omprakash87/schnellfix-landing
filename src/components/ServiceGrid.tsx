@@ -188,7 +188,7 @@ const ServiceGrid: FC = () => {
 
     return (
         <section ref={sectionRef} id="services" style={{
-            padding: '10rem 40px',
+            padding: 'clamp(4rem, 15vw, 10rem) clamp(1rem, 5vw, 40px)',
             background: '#1A1A1A',
         }}>
             <div style={{
@@ -197,15 +197,15 @@ const ServiceGrid: FC = () => {
             }}>
                 <div style={{
                     textAlign: 'center',
-                    marginBottom: '6rem',
+                    marginBottom: 'clamp(3rem, 8vw, 6rem)',
                 }}>
                     <SmoothReveal direction="up" delay={0.1}>
                         <h2 style={{
-                            fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+                            fontSize: 'clamp(1.75rem, 8vw, 4rem)',
                             fontWeight: 800,
                             lineHeight: 1.05,
                             letterSpacing: '-0.05em',
-                            marginBottom: '1.5rem',
+                            marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
                             color: '#FFFFFF',
                             cursor: 'default',
                         }}>
@@ -215,19 +215,20 @@ const ServiceGrid: FC = () => {
                         </h2>
                     </SmoothReveal>
                     <p style={{
-                        fontSize: '1.25rem',
+                        fontSize: 'clamp(1rem, 3vw, 1.25rem)',
                         color: '#999999',
                         maxWidth: '700px',
                         margin: '0 auto',
                         lineHeight: 1.8,
+                        padding: '0 clamp(1rem, 4vw, 2rem)',
                     }}>
                         From device repairs to home installations, we connect you with expert professionals ready to fix it all.
                     </p>
                 </div>
                 <div ref={cardsRef} style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                    gap: '2rem',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                    gap: 'clamp(1.5rem, 4vw, 2rem)',
                     marginBottom: '4rem',
                     width: '100%',
                 }}>
@@ -307,7 +308,7 @@ const ServiceGrid: FC = () => {
                                 <div 
                                     data-icon
                                     style={{
-                                        marginBottom: '2rem',
+                                        marginBottom: 'clamp(1rem, 3vw, 2rem)',
                                         color: service.color,
                                         display: 'flex',
                                         alignItems: 'center',
@@ -318,9 +319,9 @@ const ServiceGrid: FC = () => {
                                     {service.icon}
                                 </div>
                                 <h3 style={{
-                                    fontSize: '1.5rem',
+                                    fontSize: 'clamp(1.125rem, 3vw, 1.5rem)',
                                     fontWeight: 700,
-                                    marginBottom: '1rem',
+                                    marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
                                     color: '#FFFFFF',
                                 }}>
                                     {service.title}
@@ -328,7 +329,7 @@ const ServiceGrid: FC = () => {
                                 <p style={{
                                     color: 'rgba(255, 255, 255, 0.7)',
                                     lineHeight: 1.7,
-                                    fontSize: '1rem',
+                                    fontSize: 'clamp(0.875rem, 2vw, 1rem)',
                                 }}>
                                     {service.description}
                                 </p>

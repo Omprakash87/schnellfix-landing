@@ -12,6 +12,9 @@ const MagneticField: React.FC<MagneticFieldProps> = ({ children, strength = 0.3 
     const magneticFieldRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // Disable on mobile devices
+        if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
+        
         const container = containerRef.current;
         const field = magneticFieldRef.current;
         if (!container || !field) return;
