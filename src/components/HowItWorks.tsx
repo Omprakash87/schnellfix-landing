@@ -2,11 +2,8 @@ import { useRef } from 'react';
 import type { FC, ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ClipboardCheck, Users, CheckCircle } from 'lucide-react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SmoothReveal from './SmoothReveal';
-import ElegantHover from './ElegantHover';
 
 interface Step {
     number: string;
@@ -103,7 +100,7 @@ const HowItWorks: FC = () => {
             });
 
             // Parallax scroll effect
-            steps.forEach((step, index) => {
+            steps.forEach((step) => {
                 gsap.to(step, {
                     y: -20,
                     scrollTrigger: {

@@ -2,10 +2,8 @@ import { useRef } from 'react';
 import type { FC } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Zap, Clock, DollarSign, Shield, Calendar, Headphones } from 'lucide-react';
 import SmoothReveal from './SmoothReveal';
-import ElegantHover from './ElegantHover';
 
 interface Benefit {
     title: string;
