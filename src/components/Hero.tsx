@@ -168,8 +168,8 @@ const Hero: FC = () => {
                 zIndex: 0,
             }} />
             
-            {/* Creative liquid morphing blobs - reduced on mobile */}
-            <div style={{ display: window.innerWidth > 768 ? 'block' : 'none' }}>
+            {/* Creative liquid morphing blobs - desktop only for performance */}
+            <div className="desktop-only">
                 <LiquidMorph size={500} color="rgba(255, 255, 255, 0.015)" position={{ top: '20%', left: '15%' }} />
                 <LiquidMorph size={600} color="rgba(255, 255, 255, 0.012)" position={{ bottom: '25%', right: '20%' }} />
                 <LiquidMorph size={400} color="rgba(255, 255, 255, 0.01)" position={{ top: '60%', left: '50%' }} />
