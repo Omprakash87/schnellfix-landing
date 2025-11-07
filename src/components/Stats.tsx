@@ -103,10 +103,10 @@ const Stats: FC = () => {
         if (gradientBg) {
             // Morphing gradient animation
             const gradients = [
-                'radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.2) 0%, rgba(0, 191, 255, 0.1) 50%, transparent 100%)',
-                'radial-gradient(circle at 80% 70%, rgba(0, 191, 255, 0.2) 0%, rgba(255, 165, 0, 0.1) 50%, transparent 100%)',
-                'radial-gradient(circle at 50% 50%, rgba(255, 165, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 50%, transparent 100%)',
-                'radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.2) 0%, rgba(0, 191, 255, 0.1) 50%, transparent 100%)',
+                'radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 100%)',
+                'radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.2) 0%, rgba(245, 158, 11, 0.1) 50%, transparent 100%)',
+                'radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.2) 0%, rgba(37, 99, 235, 0.1) 50%, transparent 100%)',
+                'radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 100%)',
             ];
             
             const tl = gsap.timeline({ repeat: -1 });
@@ -123,7 +123,7 @@ const Stats: FC = () => {
     return (
         <section ref={sectionRef} style={{
             padding: '8rem 40px',
-            background: 'linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%)',
+            background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
             position: 'relative',
             overflow: 'hidden',
         }}>
@@ -133,7 +133,7 @@ const Stats: FC = () => {
                 style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.2) 0%, rgba(0, 191, 255, 0.1) 50%, transparent 100%)',
+                    background: 'radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 100%)',
                     pointerEvents: 'none',
                     zIndex: 0,
                 }} />
@@ -145,7 +145,7 @@ const Stats: FC = () => {
                 right: '-10%',
                 width: '500px',
                 height: '500px',
-                background: 'radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%)',
                 borderRadius: '50%',
                 pointerEvents: 'none',
                 zIndex: 0,
@@ -188,7 +188,7 @@ const Stats: FC = () => {
                                             scale: 1.05,
                                             background: 'rgba(255, 255, 255, 0.05)',
                                             borderColor: 'rgba(255, 255, 255, 0.2)',
-                                            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+                                            boxShadow: '0 25px 50px rgba(37, 99, 235, 0.3), 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(96, 165, 250, 0.2)',
                                             duration: 0.4,
                                             ease: 'power2.out',
                                         });
@@ -226,7 +226,11 @@ const Stats: FC = () => {
                             <div style={{
                                 fontSize: 'clamp(2rem, 6vw, 4rem)',
                                 fontWeight: 800,
-                                color: '#FFD700',
+                                background: 'linear-gradient(135deg, #2563EB 0%, #60A5FA 50%, #06B6D4 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                                filter: 'drop-shadow(0 0 20px rgba(37, 99, 235, 0.5))',
                                 lineHeight: 1,
                                 marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
                                 display: 'flex',

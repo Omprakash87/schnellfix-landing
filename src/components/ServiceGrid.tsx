@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import type { FC, ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
@@ -8,6 +8,7 @@ import ElegantHover from './ElegantHover';
 import SmoothReveal from './SmoothReveal';
 import MagneticField from './MagneticField';
 import AdvancedParallax from './AdvancedParallax';
+import { isMobile } from '../utils/responsive';
 
 interface Service {
     title: string;
@@ -19,6 +20,14 @@ interface Service {
 const ServiceGrid: FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const cardsRef = useRef<HTMLDivElement>(null);
+    const [isMobileView, setIsMobileView] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobileView(isMobile());
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useGSAP(() => {
         const section = sectionRef.current;
@@ -71,7 +80,7 @@ const ServiceGrid: FC = () => {
             scale: 1.05,
             rotationX: (mouseY - rect.height / 2) / 20,
             rotationY: (mouseX - rect.width / 2) / 20,
-            boxShadow: '0 25px 50px rgba(0, 0, 0, 0.6), 0 15px 30px rgba(0, 0, 0, 0.5)',
+            boxShadow: '0 30px 60px rgba(37, 99, 235, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(96, 165, 250, 0.3)',
             duration: 0.5,
             ease: 'power2.out',
         });
@@ -88,7 +97,7 @@ const ServiceGrid: FC = () => {
             
             // Pulse color effect
             gsap.to(iconEl, {
-                filter: 'drop-shadow(0 0 20px currentColor)',
+                filter: 'drop-shadow(0 0 25px currentColor) drop-shadow(0 0 40px currentColor)',
                 duration: 0.3,
             });
         }
@@ -129,7 +138,7 @@ const ServiceGrid: FC = () => {
             scale: 1,
             rotationX: 0,
             rotationY: 0,
-            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 12px 24px rgba(37, 99, 235, 0.2), 0 8px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
             duration: 0.5,
             ease: 'back.out(1.7)',
         });
@@ -152,44 +161,44 @@ const ServiceGrid: FC = () => {
             title: 'Device Repair',
             description: 'Expert repairs for smartphones, laptops, tablets, gaming consoles, and all electronics. Fast turnaround with warranty-backed service.',
             icon: <Monitor size={48} />,
-            color: '#FFA500',
+            color: '#2563EB',
         },
         {
             title: 'AC/TV Installation',
             description: 'Professional installation of AC units, smart TVs, home theater systems, and entertainment setups. Proper wiring and setup guaranteed.',
             icon: <Zap size={48} />,
-            color: '#00BFFF',
+            color: '#06B6D4',
         },
         {
             title: 'Floor & Glass Cleaning',
             description: 'Deep cleaning services for floors, windows, glass surfaces, and interior spaces. Eco-friendly products and professional equipment.',
             icon: <Brush size={48} />,
-            color: '#3CB371',
+            color: '#60A5FA',
         },
         {
             title: 'Plumbing & Electrical',
             description: 'Licensed professionals for all plumbing and electrical needs. From simple repairs to complete installations, done right the first time.',
             icon: <Wrench size={48} />,
-            color: '#FF6347',
+            color: '#F59E0B',
         },
         {
             title: 'Home Automation Setup',
             description: 'Transform your home with smart devices, IoT integration, and automated systems. Expert setup and configuration for maximum convenience.',
             icon: <Lightbulb size={48} />,
-            color: '#DA70D6',
+            color: '#3B82F6',
         },
         {
             title: 'Seasonal Maintenance',
             description: 'Comprehensive seasonal maintenance programs to keep your home or office in perfect condition year-round. Preventive care at its best.',
             icon: <Calendar size={48} />,
-            color: '#FFFFFF',
+            color: '#06B6D4',
         },
     ];
 
     return (
         <section ref={sectionRef} id="services" style={{
             padding: 'clamp(4rem, 15vw, 10rem) clamp(1rem, 5vw, 40px)',
-            background: '#1A1A1A',
+            background: '#0F172A',
         }}>
             <div style={{
                 maxWidth: '1400px',
@@ -201,12 +210,15 @@ const ServiceGrid: FC = () => {
                 }}>
                     <SmoothReveal direction="up" delay={0.1}>
                         <h2 style={{
-                            fontSize: 'clamp(1.75rem, 8vw, 4rem)',
-                            fontWeight: 800,
+                            fontSize: 'clamp(2rem, 9vw, 4.5rem)',
+                            fontWeight: 900,
                             lineHeight: 1.05,
-                            letterSpacing: '-0.05em',
-                            marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
-                            color: '#FFFFFF',
+                            letterSpacing: '-0.04em',
+                            marginBottom: 'clamp(1.25rem, 3.5vw, 2rem)',
+                            background: 'linear-gradient(135deg, #FFFFFF 0%, #60A5FA 50%, #2563EB 100%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
                             cursor: 'default',
                         }}>
                             <span style={{ display: 'block' }}>all that you</span>
@@ -215,22 +227,27 @@ const ServiceGrid: FC = () => {
                         </h2>
                     </SmoothReveal>
                     <p style={{
-                        fontSize: 'clamp(1rem, 3vw, 1.25rem)',
-                        color: '#999999',
-                        maxWidth: '700px',
+                        fontSize: 'clamp(1.125rem, 3.5vw, 1.375rem)',
+                        color: 'rgba(255, 255, 255, 0.8)',
+                        maxWidth: '750px',
                         margin: '0 auto',
-                        lineHeight: 1.8,
+                        lineHeight: 1.9,
                         padding: '0 clamp(1rem, 4vw, 2rem)',
+                        fontWeight: 400,
+                        letterSpacing: '-0.01em',
                     }}>
                         From device repairs to home installations, we connect you with expert professionals ready to fix it all.
                     </p>
                 </div>
                 <div ref={cardsRef} style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                    gap: 'clamp(1.5rem, 4vw, 2rem)',
+                    gridTemplateColumns: isMobileView 
+                        ? '1fr' 
+                        : 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
+                    gap: isMobileView ? 'clamp(1.5rem, 4vw, 2rem)' : 'clamp(1.5rem, 4vw, 2rem)',
                     marginBottom: '4rem',
                     width: '100%',
+                    padding: isMobileView ? '0 0.5rem' : '0',
                 }}>
                     {services.map((service, index) => (
                         <AdvancedParallax key={index} speed={0.3 + index * 0.1} direction="up">
@@ -240,57 +257,94 @@ const ServiceGrid: FC = () => {
                                         <div 
                                             data-card 
                                             onMouseEnter={(e) => {
-                                                handleCardHover(e);
-                                                const card = e.currentTarget;
-                                                
-                                                // Creative multi-layer animation
-                                                gsap.to(card, {
-                                                    scale: 1.05,
-                                                    y: -10,
-                                                    z: 50,
-                                                    rotationY: 5,
-                                                    boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4)',
-                                                    duration: 0.6,
-                                                    ease: 'power3.out',
-                                                });
-                                                
-                                                // Icon creative animation
-                                                const icon = card.querySelector('[data-icon]') as HTMLElement;
-                                                if (icon) {
-                                                    gsap.to(icon, {
-                                                        scale: 1.2,
-                                                        rotation: 360,
-                                                        y: -8,
-                                                        filter: 'drop-shadow(0 0 20px currentColor)',
-                                                        duration: 0.8,
-                                                        ease: 'back.out(2)',
+                                                if (!isMobileView) {
+                                                    handleCardHover(e);
+                                                    const card = e.currentTarget;
+                                                    
+                                                    // Creative multi-layer animation
+                                                    gsap.to(card, {
+                                                        scale: 1.05,
+                                                        y: -10,
+                                                        z: 50,
+                                                        rotationY: 5,
+                                                        boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4)',
+                                                        duration: 0.6,
+                                                        ease: 'power3.out',
                                                     });
+                                                    
+                                                    // Icon creative animation
+                                                    const icon = card.querySelector('[data-icon]') as HTMLElement;
+                                                    if (icon) {
+                                                        gsap.to(icon, {
+                                                            scale: 1.2,
+                                                            rotation: 360,
+                                                            y: -8,
+                                                            filter: 'drop-shadow(0 0 25px currentColor) drop-shadow(0 0 40px currentColor)',
+                                                            duration: 0.8,
+                                                            ease: 'back.out(2)',
+                                                        });
+                                                    }
                                                 }
                                             }}
                                             onMouseLeave={(e) => {
-                                                handleCardLeave(e);
-                                                const card = e.currentTarget;
-                                                
-                                                gsap.to(card, {
-                                                    scale: 1,
-                                                    y: 0,
-                                                    z: 0,
-                                                    rotationY: 0,
-                                                    boxShadow: 'none',
-                                                    duration: 0.6,
-                                                    ease: 'elastic.out(1, 0.3)',
-                                                });
-                                                
-                                                const icon = card.querySelector('[data-icon]') as HTMLElement;
-                                                if (icon) {
-                                                    gsap.to(icon, {
+                                                if (!isMobileView) {
+                                                    handleCardLeave(e);
+                                                    const card = e.currentTarget;
+                                                    
+                                                    gsap.to(card, {
                                                         scale: 1,
-                                                        rotation: 0,
                                                         y: 0,
-                                                        filter: 'none',
+                                                        z: 0,
+                                                        rotationY: 0,
+                                                        boxShadow: 'none',
                                                         duration: 0.6,
                                                         ease: 'elastic.out(1, 0.3)',
                                                     });
+                                                    
+                                                    const icon = card.querySelector('[data-icon]') as HTMLElement;
+                                                    if (icon) {
+                                                        gsap.to(icon, {
+                                                            scale: 1,
+                                                            rotation: 0,
+                                                            y: 0,
+                                                            filter: 'none',
+                                                            duration: 0.6,
+                                                            ease: 'elastic.out(1, 0.3)',
+                                                        });
+                                                    }
+                                                }
+                                            }}
+                                            onTouchStart={(e) => {
+                                                if (isMobileView) {
+                                                    const card = e.currentTarget;
+                                                    gsap.to(card, {
+                                                        scale: 0.98,
+                                                        duration: 0.2,
+                                                        ease: 'power2.out',
+                                                    });
+                                                }
+                                            }}
+                                            onTouchEnd={(e) => {
+                                                if (isMobileView) {
+                                                    const card = e.currentTarget;
+                                                    gsap.to(card, {
+                                                        scale: 1,
+                                                        duration: 0.3,
+                                                        ease: 'back.out(1.7)',
+                                                    });
+                                                    
+                                                    // Mobile tap animation
+                                                    const icon = card.querySelector('[data-icon]') as HTMLElement;
+                                                    if (icon) {
+                                                        gsap.to(icon, {
+                                                            scale: 1.15,
+                                                            rotation: 180,
+                                                            duration: 0.4,
+                                                            ease: 'back.out(2)',
+                                                            yoyo: true,
+                                                            repeat: 1,
+                                                        });
+                                                    }
                                                 }
                                             }}
                                             style={{
@@ -319,17 +373,19 @@ const ServiceGrid: FC = () => {
                                     {service.icon}
                                 </div>
                                 <h3 style={{
-                                    fontSize: 'clamp(1.125rem, 3vw, 1.5rem)',
-                                    fontWeight: 700,
-                                    marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
+                                    fontSize: 'clamp(1.25rem, 3.5vw, 1.75rem)',
+                                    fontWeight: 800,
+                                    marginBottom: 'clamp(0.875rem, 2.5vw, 1.25rem)',
                                     color: '#FFFFFF',
+                                    letterSpacing: '-0.01em',
                                 }}>
                                     {service.title}
                                 </h3>
                                 <p style={{
-                                    color: 'rgba(255, 255, 255, 0.7)',
-                                    lineHeight: 1.7,
-                                    fontSize: 'clamp(0.875rem, 2vw, 1rem)',
+                                    color: 'rgba(255, 255, 255, 0.8)',
+                                    lineHeight: 1.8,
+                                    fontSize: 'clamp(0.9375rem, 2.25vw, 1.0625rem)',
+                                    fontWeight: 400,
                                 }}>
                                     {service.description}
                                 </p>

@@ -74,7 +74,7 @@ const ScrollProgress: React.FC = () => {
                     cy="50"
                     r="45"
                     fill="none"
-                    stroke="#FFD700"
+                    stroke="#2563EB"
                     strokeWidth="4"
                     strokeLinecap="round"
                 />

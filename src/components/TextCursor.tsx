@@ -10,7 +10,7 @@ const TextCursor: React.FC = () => {
             cursor.textContent = '|';
             cursor.style.cssText = `
                 display: inline-block;
-                color: #FFD700;
+                color: #2563EB;
                 animation: blink 1s infinite;
                 margin-left: 2px;
             `;

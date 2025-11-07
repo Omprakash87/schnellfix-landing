@@ -31,28 +31,35 @@ const StyledButton = styled.button<ButtonProps>`
     transition: all 0.2s ease;
     font-family: 'Inter', sans-serif;
     
-    background: ${props => props.backgroundColor || '#FFFFFF'};
-    color: ${props => props.variant === 'primary' ? '#000000' : '#FFFFFF'};
+    background: ${props => {
+        if (props.backgroundColor === '#2563EB') {
+            return 'linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%)';
+        }
+        return props.backgroundColor || '#FFFFFF';
+    }};
+    color: ${props => props.variant === 'primary' ? '#FFFFFF' : '#FFFFFF'};
     
     ${props => props.kind === 'elevated' && `
         box-shadow: 
-            0 8px 16px rgba(0, 0, 0, 0.3),
-            0 4px 8px rgba(0, 0, 0, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            0 8px 24px ${props.backgroundColor === '#2563EB' ? 'rgba(37, 99, 235, 0.4)' : 'rgba(0, 0, 0, 0.3)'},
+            0 4px 12px ${props.backgroundColor === '#2563EB' ? 'rgba(37, 99, 235, 0.3)' : 'rgba(0, 0, 0, 0.2)'},
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
         transform: translateY(-2px);
+        border: ${props.backgroundColor === '#2563EB' ? '1px solid rgba(96, 165, 250, 0.3)' : 'none'};
         
         &:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px) scale(1.02);
             box-shadow: 
-                0 12px 24px rgba(0, 0, 0, 0.4),
-                0 6px 12px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 16px 32px ${props.backgroundColor === '#2563EB' ? 'rgba(37, 99, 235, 0.6)' : 'rgba(0, 0, 0, 0.4)'},
+                0 8px 16px ${props.backgroundColor === '#2563EB' ? 'rgba(37, 99, 235, 0.4)' : 'rgba(0, 0, 0, 0.3)'},
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            filter: ${props.backgroundColor === '#2563EB' ? 'drop-shadow(0 0 20px rgba(37, 99, 235, 0.8))' : 'none'};
         }
         
         &:active {
-            transform: translateY(0px);
+            transform: translateY(-2px) scale(0.98);
             box-shadow: 
-                0 4px 8px rgba(0, 0, 0, 0.2),
+                0 4px 12px ${props.backgroundColor === '#2563EB' ? 'rgba(37, 99, 235, 0.3)' : 'rgba(0, 0, 0, 0.2)'},
                 inset 0 2px 4px rgba(0, 0, 0, 0.3);
         }
     `}

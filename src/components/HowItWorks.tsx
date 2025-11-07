@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import type { FC, ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ClipboardCheck, Users, CheckCircle } from 'lucide-react';
 import SmoothReveal from './SmoothReveal';
+import { isMobile } from '../utils/responsive';
 
 interface Step {
     number: string;
@@ -17,6 +18,14 @@ const HowItWorks: FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
     const connectorsRef = useRef<(HTMLDivElement | null)[]>([]);
+    const [isMobileView, setIsMobileView] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobileView(isMobile());
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useGSAP(() => {
         const section = sectionRef.current;
@@ -120,28 +129,28 @@ const HowItWorks: FC = () => {
             title: 'Request a Service',
             description: 'Submit your service request with details, photos, and preferred timing. Our platform makes it easy to describe exactly what you need.',
             icon: <ClipboardCheck size={36} />,
-            color: '#FFD700',
+            color: '#2563EB',
         },
         {
             number: '2',
             title: 'Get Matched',
             description: 'Instantly receive quotes from verified local professionals. Review profiles, ratings, and pricing to choose the best match for your needs.',
             icon: <Users size={36} />,
-            color: '#00BFFF',
+            color: '#06B6D4',
         },
         {
             number: '3',
             title: 'Complete & Pay',
             description: 'Track your service in real-time. Pay securely only after completion and satisfaction. Your payment is protected until you confirm the work.',
             icon: <CheckCircle size={36} />,
-            color: '#3CB371',
+            color: '#F59E0B',
         },
     ];
 
     return (
         <section ref={sectionRef} id="how-it-works" style={{
             padding: 'clamp(6rem, 15vw, 12rem) clamp(1rem, 5vw, 40px)',
-            background: 'linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 100%)',
+            background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)',
             position: 'relative',
             overflow: 'hidden',
         }}>
@@ -156,13 +165,12 @@ const HowItWorks: FC = () => {
                 }}>
                     <SmoothReveal direction="up" delay={0.1}>
                         <h2 style={{
-                            fontSize: 'clamp(2rem, 7vw, 4.5rem)',
-                            fontWeight: 800,
-                            lineHeight: 1.1,
+                            fontSize: 'clamp(2.25rem, 8vw, 5rem)',
+                            fontWeight: 900,
+                            lineHeight: 1.05,
                             letterSpacing: '-0.04em',
-                            marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
-                            color: '#FFFFFF',
-                            background: 'linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%)',
+                            marginBottom: 'clamp(1.25rem, 3.5vw, 2rem)',
+                            background: 'linear-gradient(135deg, #FFFFFF 0%, #60A5FA 50%, #2563EB 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text',
@@ -172,11 +180,13 @@ const HowItWorks: FC = () => {
                     </SmoothReveal>
                     <SmoothReveal direction="up" delay={0.2}>
                         <p style={{
-                            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-                            color: 'rgba(255, 255, 255, 0.7)',
-                            maxWidth: '700px',
+                            fontSize: 'clamp(1.125rem, 3vw, 1.375rem)',
+                            color: 'rgba(255, 255, 255, 0.85)',
+                            maxWidth: '750px',
                             margin: '0 auto',
-                            lineHeight: 1.8,
+                            lineHeight: 1.9,
+                            fontWeight: 400,
+                            letterSpacing: '-0.01em',
                         }}>
                             Three simple steps to get your service completed by verified professionals
                         </p>
@@ -198,92 +208,146 @@ const HowItWorks: FC = () => {
                                 className="how-it-works-step"
                                 style={{
                                     display: 'flex',
-                                    flexDirection: 'row',
-                                    alignItems: 'flex-start',
-                                    gap: 'clamp(2rem, 4vw, 3rem)',
-                                    padding: 'clamp(2rem, 4vw, 3rem)',
-                                    background: 'rgba(255, 255, 255, 0.02)',
-                                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                                    flexDirection: isMobileView ? 'column' : 'row',
+                                    alignItems: isMobileView ? 'center' : 'flex-start',
+                                    gap: isMobileView ? 'clamp(1.5rem, 4vw, 2rem)' : 'clamp(2rem, 4vw, 3rem)',
+                                    padding: 'clamp(1.5rem, 4vw, 3rem)',
+                                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(37, 99, 235, 0.02) 100%)',
+                                    border: '1px solid rgba(255, 255, 255, 0.12)',
                                     borderRadius: '24px',
+                                    boxShadow: '0 12px 40px rgba(37, 99, 235, 0.15), 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
                                     backdropFilter: 'blur(10px)',
                                     position: 'relative',
                                     overflow: 'hidden',
                                     transition: 'all 0.3s ease',
+                                    textAlign: isMobileView ? 'center' : 'left',
                                 }}
                                 onMouseEnter={(e) => {
-                                    const card = e.currentTarget;
-                                    const numberBadge = card.querySelector('[data-number-badge]') as HTMLElement;
-                                    const iconContainer = card.querySelector('[data-step-icon]') as HTMLElement;
-                                    
-                                    gsap.to(card, {
-                                        y: -8,
-                                        background: 'rgba(255, 255, 255, 0.04)',
-                                        borderColor: `rgba(255, 255, 255, 0.15)`,
-                                        boxShadow: `0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px ${step.color}33`,
-                                        duration: 0.4,
-                                        ease: 'power2.out',
-                                    });
-                                    
-                                    if (numberBadge) {
-                                        gsap.to(numberBadge, {
-                                            scale: 1.1,
-                                            boxShadow: `0 8px 24px ${step.color}40`,
+                                    if (!isMobileView) {
+                                        const card = e.currentTarget;
+                                        const numberBadge = card.querySelector('[data-number-badge]') as HTMLElement;
+                                        const iconContainer = card.querySelector('[data-step-icon]') as HTMLElement;
+                                        
+                                        gsap.to(card, {
+                                            y: -8,
+                                            background: 'rgba(255, 255, 255, 0.04)',
+                                            borderColor: `rgba(255, 255, 255, 0.15)`,
+                                            boxShadow: `0 25px 50px rgba(37, 99, 235, 0.3), 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 2px ${step.color}50`,
                                             duration: 0.4,
                                             ease: 'power2.out',
                                         });
-                                    }
-                                    
-                                    if (iconContainer) {
-                                        gsap.to(iconContainer, {
-                                            scale: 1.1,
-                                            y: -5,
-                                            boxShadow: `0 8px 20px ${step.color}30`,
-                                            duration: 0.4,
-                                            ease: 'power2.out',
-                                        });
+                                        
+                                        if (numberBadge) {
+                                            gsap.to(numberBadge, {
+                                                scale: 1.1,
+                                                boxShadow: `0 8px 24px ${step.color}40`,
+                                                duration: 0.4,
+                                                ease: 'power2.out',
+                                            });
+                                        }
+                                        
+                                        if (iconContainer) {
+                                            gsap.to(iconContainer, {
+                                                scale: 1.1,
+                                                y: -5,
+                                                boxShadow: `0 8px 20px ${step.color}30`,
+                                                duration: 0.4,
+                                                ease: 'power2.out',
+                                            });
+                                        }
                                     }
                                 }}
                                 onMouseLeave={(e) => {
-                                    const card = e.currentTarget;
-                                    const numberBadge = card.querySelector('[data-number-badge]') as HTMLElement;
-                                    const iconContainer = card.querySelector('[data-step-icon]') as HTMLElement;
-                                    
-                                    gsap.to(card, {
-                                        y: 0,
-                                        background: 'rgba(255, 255, 255, 0.02)',
-                                        borderColor: 'rgba(255, 255, 255, 0.08)',
-                                        boxShadow: 'none',
-                                        duration: 0.4,
-                                        ease: 'power2.out',
-                                    });
-                                    
-                                    if (numberBadge) {
-                                        gsap.to(numberBadge, {
-                                            scale: 1,
-                                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
-                                            duration: 0.4,
-                                            ease: 'power2.out',
-                                        });
-                                    }
-                                    
-                                    if (iconContainer) {
-                                        gsap.to(iconContainer, {
-                                            scale: 1,
+                                    if (!isMobileView) {
+                                        const card = e.currentTarget;
+                                        const numberBadge = card.querySelector('[data-number-badge]') as HTMLElement;
+                                        const iconContainer = card.querySelector('[data-step-icon]') as HTMLElement;
+                                        
+                                        gsap.to(card, {
                                             y: 0,
+                                            background: 'rgba(255, 255, 255, 0.02)',
+                                            borderColor: 'rgba(255, 255, 255, 0.08)',
                                             boxShadow: 'none',
                                             duration: 0.4,
                                             ease: 'power2.out',
                                         });
+                                        
+                                        if (numberBadge) {
+                                            gsap.to(numberBadge, {
+                                                scale: 1,
+                                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+                                                duration: 0.4,
+                                                ease: 'power2.out',
+                                            });
+                                        }
+                                        
+                                        if (iconContainer) {
+                                            gsap.to(iconContainer, {
+                                                scale: 1,
+                                                y: 0,
+                                                boxShadow: 'none',
+                                                duration: 0.4,
+                                                ease: 'power2.out',
+                                            });
+                                        }
+                                    }
+                                }}
+                                onTouchStart={(e) => {
+                                    if (isMobileView) {
+                                        const card = e.currentTarget;
+                                        gsap.to(card, {
+                                            scale: 0.98,
+                                            duration: 0.2,
+                                            ease: 'power2.out',
+                                        });
+                                    }
+                                }}
+                                onTouchEnd={(e) => {
+                                    if (isMobileView) {
+                                        const card = e.currentTarget;
+                                        const numberBadge = card.querySelector('[data-number-badge]') as HTMLElement;
+                                        const iconContainer = card.querySelector('[data-step-icon]') as HTMLElement;
+                                        
+                                        gsap.to(card, {
+                                            scale: 1,
+                                            duration: 0.3,
+                                            ease: 'back.out(1.7)',
+                                        });
+                                        
+                                        // Mobile tap animation
+                                        if (numberBadge) {
+                                            gsap.to(numberBadge, {
+                                                scale: 1.15,
+                                                rotation: 360,
+                                                duration: 0.5,
+                                                ease: 'back.out(2)',
+                                                yoyo: true,
+                                                repeat: 1,
+                                            });
+                                        }
+                                        
+                                        if (iconContainer) {
+                                            gsap.to(iconContainer, {
+                                                scale: 1.2,
+                                                rotation: 180,
+                                                duration: 0.5,
+                                                ease: 'back.out(2)',
+                                                yoyo: true,
+                                                repeat: 1,
+                                            });
+                                        }
                                     }
                                 }}
                             >
                                 {/* Professional number badge */}
                                 <div style={{
                                     display: 'flex',
-                                    flexDirection: 'column',
+                                    flexDirection: isMobileView ? 'row' : 'column',
                                     alignItems: 'center',
-                                    gap: 'clamp(1rem, 2vw, 1.5rem)',
+                                    justifyContent: isMobileView ? 'center' : 'flex-start',
+                                    gap: isMobileView ? 'clamp(1rem, 3vw, 1.5rem)' : 'clamp(1rem, 2vw, 1.5rem)',
                                     flexShrink: 0,
+                                    width: isMobileView ? '100%' : 'auto',
                                 }}>
                                     <div 
                                         data-number-badge
@@ -336,29 +400,36 @@ const HowItWorks: FC = () => {
                                 {/* Content */}
                                 <div style={{
                                     flex: 1,
-                                    paddingTop: 'clamp(0.5rem, 1.5vw, 1rem)',
+                                    paddingTop: isMobileView ? '0' : 'clamp(0.5rem, 1.5vw, 1rem)',
+                                    width: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: isMobileView ? '1.5rem' : '2rem',
                                 }}>
-                                    <h3 style={{
-                                        fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-                                        fontWeight: 700,
-                                        marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
-                                        color: '#FFFFFF',
-                                        letterSpacing: '-0.02em',
-                                    }}>
-                                        {step.title}
-                                    </h3>
-                                    <p style={{
-                                        color: 'rgba(255, 255, 255, 0.75)',
-                                        lineHeight: 1.8,
-                                        fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
-                                        maxWidth: '600px',
-                                    }}>
-                                        {step.description}
-                                    </p>
+                                    <div>
+                                        <h3 style={{
+                                            fontSize: 'clamp(1.625rem, 4.5vw, 2.25rem)',
+                                            fontWeight: 800,
+                                            marginBottom: 'clamp(0.875rem, 2.5vw, 1.25rem)',
+                                            color: '#FFFFFF',
+                                            letterSpacing: '-0.02em',
+                                        }}>
+                                            {step.title}
+                                        </h3>
+                                        <p style={{
+                                            color: 'rgba(255, 255, 255, 0.85)',
+                                            lineHeight: 1.9,
+                                            fontSize: 'clamp(1.0625rem, 2.75vw, 1.1875rem)',
+                                            maxWidth: '600px',
+                                            fontWeight: 400,
+                                        }}>
+                                            {step.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 
-                            {/* Connector line between steps */}
+                            {/* Connector line between steps - responsive positioning */}
                             {index < steps.length - 1 && (
                                 <div
                                     ref={(el) => {
@@ -366,13 +437,14 @@ const HowItWorks: FC = () => {
                                     }}
                                     style={{
                                         position: 'absolute',
-                                        left: 'clamp(35px, 6vw, 45px)',
+                                        left: isMobileView ? '50%' : 'clamp(35px, 6vw, 45px)',
                                         top: '100%',
-                                        width: '2px',
+                                        width: isMobileView ? '2px' : '2px',
                                         height: 'clamp(2rem, 5vw, 4rem)',
                                         background: `linear-gradient(180deg, ${steps[index].color}60, ${steps[index + 1].color}60)`,
                                         transform: 'translateX(-50%)',
                                         opacity: 0.3,
+                                        display: isMobileView ? 'block' : 'block',
                                     }}
                                 />
                             )}

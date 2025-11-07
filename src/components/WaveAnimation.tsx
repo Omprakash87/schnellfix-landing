@@ -31,9 +31,9 @@ const WaveAnimation: React.FC = () => {
                 </path>
                 <defs>
                     <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#FFD700" stopOpacity="0.3" />
-                        <stop offset="50%" stopColor="#00BFFF" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#FFD700" stopOpacity="0.3" />
+                        <stop offset="0%" stopColor="#2563EB" stopOpacity="0.3" />
+                        <stop offset="50%" stopColor="#06B6D4" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#2563EB" stopOpacity="0.3" />
                     </linearGradient>
                 </defs>
             </svg>

@@ -16,7 +16,7 @@ html {
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #1A1A1A;
+    background-color: #0F172A;
     color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -41,6 +41,20 @@ button, a, [role="button"] {
     min-height: 44px;
     min-width: 44px;
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Improved mobile scrolling */
+@media (max-width: 768px) {
+    body {
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
+    }
+    
+    /* Prevent horizontal scroll on mobile */
+    * {
+        max-width: 100%;
+    }
 }
 
 /* Responsive Typography */
@@ -99,12 +113,108 @@ button, a, [role="button"] {
         margin-top: 0 !important;
     }
     
+    /* Mobile-optimized spacing */
+    section {
+        padding-left: clamp(1rem, 4vw, 1.5rem) !important;
+        padding-right: clamp(1rem, 4vw, 1.5rem) !important;
+    }
+    
+    /* Better touch targets */
+    button, a, [role="button"], [data-card] {
+        min-height: 48px;
+        min-width: 48px;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+        tap-highlight-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Smooth scrolling on mobile */
+    html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+    
     /* Reduce motion on mobile for better performance */
     @media (prefers-reduced-motion: no-preference) {
         * {
             animation-duration: 0.3s !important;
             transition-duration: 0.3s !important;
         }
+    }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+    section {
+        padding-left: clamp(1.5rem, 5vw, 2.5rem) !important;
+        padding-right: clamp(1.5rem, 5vw, 2.5rem) !important;
+    }
+}
+
+/* Mobile-specific animations */
+@media (max-width: 768px) {
+    @keyframes mobileSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes mobileFadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @keyframes mobilePulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1);
+        }
+        50% {
+            transform: scale(1.01);
+            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+        }
+    }
+    
+    /* Mobile-friendly card animations */
+    [data-card] {
+        animation: mobileSlideIn 0.4s ease-out backwards;
+    }
+    
+    /* Stagger animation for mobile */
+    [data-card]:nth-child(1) { animation-delay: 0.1s; }
+    [data-card]:nth-child(2) { animation-delay: 0.2s; }
+    [data-card]:nth-child(3) { animation-delay: 0.3s; }
+    [data-card]:nth-child(4) { animation-delay: 0.4s; }
+    [data-card]:nth-child(5) { animation-delay: 0.5s; }
+    [data-card]:nth-child(6) { animation-delay: 0.6s; }
+    
+    /* Subtle pulse for interactive elements on mobile */
+    .how-it-works-step:hover {
+        animation: mobilePulse 2s ease-in-out infinite;
+    }
+}
+
+/* Enhanced mobile interactions */
+@media (max-width: 768px) {
+    /* Active state for touch */
+    [data-card]:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    /* Better focus states for accessibility */
+    [data-card]:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 4px;
+        border-radius: 24px;
     }
 }
 

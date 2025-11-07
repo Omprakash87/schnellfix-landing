@@ -1,13 +1,22 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import type { FC } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import Button from './neopop/Button';
 import ElegantHover from './ElegantHover';
+import { isMobile } from '../utils/responsive';
 
 const Header: FC = () => {
     const logoRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
+    const [isMobileView, setIsMobileView] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobileView(isMobile());
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useGSAP(() => {
         const logo = logoRef.current;
@@ -31,7 +40,7 @@ const Header: FC = () => {
         // Professional header scroll effect
         if (header) {
             gsap.to(header, {
-                background: 'rgba(26, 26, 26, 0.98)',
+                background: 'rgba(15, 23, 42, 0.98)',
                 backdropFilter: 'blur(20px)',
                 scrollTrigger: {
                     trigger: header,
@@ -58,11 +67,12 @@ const Header: FC = () => {
             <nav style={{
                 maxWidth: '1400px',
                 margin: '0 auto',
-                padding: '0 clamp(1rem, 4vw, 40px)',
+                padding: isMobileView ? '0 clamp(1rem, 4vw, 1.5rem)' : '0 clamp(1rem, 4vw, 40px)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 width: '100%',
+                gap: isMobileView ? '1rem' : '2rem',
             }}>
                     <ElegantHover intensity={0.02}>
                         <div 
@@ -138,11 +148,11 @@ const Header: FC = () => {
                     <Button 
                         kind="elevated"
                         variant="secondary"
-                        size="medium"
-                        backgroundColor="#6B7280"
+                        size={isMobileView ? "small" : "medium"}
+                        backgroundColor="#2563EB"
                         onClick={() => console.log('Partner Login clicked')}
                     >
-                        Partner Login
+                        {isMobileView ? 'Login' : 'Partner Login'}
                     </Button>
                 </div>
             </nav>

@@ -91,7 +91,7 @@ const MagneticCursor: React.FC = () => {
                     width: '10px',
                     height: '10px',
                     borderRadius: '50%',
-                    background: '#FFD700',
+                    background: '#2563EB',
                     pointerEvents: 'none',
                     zIndex: 9999,
                     mixBlendMode: 'difference',

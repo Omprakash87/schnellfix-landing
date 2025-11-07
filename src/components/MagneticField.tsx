@@ -106,12 +106,13 @@ const MagneticField: React.FC<MagneticFieldProps> = ({ children, strength = 0.3 
                 style={{
                     position: 'absolute',
                     inset: '-50%',
-                    background: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 70%)',
                     borderRadius: '50%',
                     pointerEvents: 'none',
                     opacity: 0,
                     transform: 'translate(-50%, -50%)',
-                    filter: 'blur(40px)',
+                    filter: 'blur(50px)',
+                    zIndex: -1,
                 }}
             />
             {children}

@@ -24,21 +24,21 @@ const Testimonials: FC = () => {
             role: 'Homeowner',
             content: 'SchnellFix saved my weekend! My AC broke on Friday evening, and within an hour, I had a professional at my door. The service was excellent, and the pricing was transparent.',
             rating: 5,
-            color: '#FFD700',
+            color: '#2563EB',
         },
         {
             name: 'Michael Chen',
             role: 'Business Owner',
             content: 'We use SchnellFix for all our office maintenance needs. The platform is intuitive, the fixers are reliable, and we\'ve never had any issues. Highly recommend!',
             rating: 5,
-            color: '#00BFFF',
+            color: '#06B6D4',
         },
         {
             name: 'Emily Rodriguez',
             role: 'Tech Enthusiast',
             content: 'I\'ve used SchnellFix multiple times for device repairs. Every experience has been smooth, from booking to completion. The real-time tracking feature is a game-changer.',
             rating: 5,
-            color: '#DA70D6',
+            color: '#F59E0B',
         },
     ];
 
@@ -118,7 +118,7 @@ const Testimonials: FC = () => {
                             position: absolute;
                             width: 300px;
                             height: 300px;
-                            background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+                            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
                             pointer-events: none;
                             filter: blur(40px);
                             opacity: 0;
@@ -163,7 +163,7 @@ const Testimonials: FC = () => {
     return (
         <section ref={sectionRef} id="testimonials" style={{
             padding: '10rem 40px',
-            background: 'linear-gradient(180deg, #1A1A1A 0%, #0A0A0A 100%)',
+            background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)',
             position: 'relative',
         }}>
             <div style={{

@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import type { FC } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { Zap, Clock, DollarSign, Shield, Calendar, Headphones } from 'lucide-react';
 import SmoothReveal from './SmoothReveal';
+import { isMobile } from '../utils/responsive';
 
 interface Benefit {
     title: string;
@@ -15,43 +16,51 @@ interface Benefit {
 const Benefits: FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const benefitRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const [isMobileView, setIsMobileView] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobileView(isMobile());
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const benefits: Benefit[] = [
         {
             title: 'Instant Quotes',
             description: 'Get real-time pricing from multiple verified professionals. Compare rates and choose the best option for your budget and timeline.',
             icon: <Zap size={32} />,
-            color: '#FFD700',
+            color: '#2563EB',
         },
         {
             title: 'Same-Day Service',
             description: 'Many services completed on the same day. Book in the morning, get professional service by evening with verified fixers.',
             icon: <Clock size={32} />,
-            color: '#00BFFF',
+            color: '#06B6D4',
         },
         {
             title: 'Transparent Pricing',
             description: 'No hidden fees or surprises. See the exact cost breakdown before you confirm. All charges are clearly displayed upfront.',
             icon: <DollarSign size={32} />,
-            color: '#3CB371',
+            color: '#60A5FA',
         },
         {
             title: 'Service Guarantee',
             description: 'All jobs are covered by our comprehensive service guarantee. If something goes wrong, we make it right at no extra cost.',
             icon: <Shield size={32} />,
-            color: '#FF6347',
+            color: '#F59E0B',
         },
         {
             title: 'Flexible Scheduling',
             description: 'Book services at your convenience. Flexible scheduling that fits your busy lifestyle, with availability around the clock.',
             icon: <Calendar size={32} />,
-            color: '#DA70D6',
+            color: '#3B82F6',
         },
         {
             title: '24/7 Support',
             description: 'Our dedicated customer support team is always available to help with any questions, concerns, or service requests.',
             icon: <Headphones size={32} />,
-            color: '#FFFFFF',
+            color: '#06B6D4',
         },
     ];
 
@@ -146,7 +155,7 @@ const Benefits: FC = () => {
     return (
         <section ref={sectionRef} id="benefits" style={{
             padding: 'clamp(6rem, 15vw, 12rem) clamp(1rem, 5vw, 40px)',
-            background: '#1A1A1A',
+            background: '#0F172A',
             position: 'relative',
         }}>
             <div style={{
@@ -159,13 +168,12 @@ const Benefits: FC = () => {
                 }}>
                     <SmoothReveal direction="up" delay={0.1}>
                         <h2 style={{
-                            fontSize: 'clamp(2rem, 7vw, 4.5rem)',
-                            fontWeight: 800,
-                            lineHeight: 1.1,
-                            letterSpacing: '-0.05em',
-                            marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
-                            color: '#FFFFFF',
-                            background: 'linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%)',
+                            fontSize: 'clamp(2.25rem, 8vw, 5rem)',
+                            fontWeight: 900,
+                            lineHeight: 1.05,
+                            letterSpacing: '-0.04em',
+                            marginBottom: 'clamp(1.25rem, 3.5vw, 2rem)',
+                            background: 'linear-gradient(135deg, #FFFFFF 0%, #60A5FA 50%, #2563EB 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text',
@@ -175,12 +183,14 @@ const Benefits: FC = () => {
                     </SmoothReveal>
                     <SmoothReveal direction="up" delay={0.2}>
                         <p style={{
-                            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-                            color: 'rgba(255, 255, 255, 0.7)',
-                            maxWidth: '700px',
+                            fontSize: 'clamp(1.125rem, 3vw, 1.375rem)',
+                            color: 'rgba(255, 255, 255, 0.85)',
+                            maxWidth: '750px',
                             margin: '0 auto',
-                            lineHeight: 1.8,
+                            lineHeight: 1.9,
                             padding: '0 clamp(1rem, 4vw, 2rem)',
+                            fontWeight: 400,
+                            letterSpacing: '-0.01em',
                         }}>
                             Experience the complete SchnellFix advantage with features designed for your convenience and peace of mind
                         </p>
@@ -189,8 +199,11 @@ const Benefits: FC = () => {
 
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                    gap: 'clamp(1.5rem, 4vw, 2.5rem)',
+                    gridTemplateColumns: isMobileView 
+                        ? '1fr' 
+                        : 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+                    gap: isMobileView ? 'clamp(1.25rem, 4vw, 2rem)' : 'clamp(1.5rem, 4vw, 2.5rem)',
+                    padding: isMobileView ? '0 0.5rem' : '0',
                 }}>
                     {benefits.map((benefit, index) => (
                         <div
@@ -200,9 +213,10 @@ const Benefits: FC = () => {
                             }}
                             style={{
                                 padding: 'clamp(2rem, 4vw, 3rem)',
-                                background: 'rgba(255, 255, 255, 0.02)',
-                                border: '1px solid rgba(255, 255, 255, 0.08)',
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(37, 99, 235, 0.02) 100%)',
+                                border: '1px solid rgba(255, 255, 255, 0.12)',
                                 borderRadius: '24px',
+                                boxShadow: '0 12px 40px rgba(37, 99, 235, 0.15), 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
                                 backdropFilter: 'blur(10px)',
                                 position: 'relative',
                                 overflow: 'hidden',
@@ -210,71 +224,109 @@ const Benefits: FC = () => {
                                 cursor: 'pointer',
                             }}
                             onMouseEnter={(e) => {
-                                const card = e.currentTarget;
-                                const iconEl = card.querySelector('[data-icon]') as HTMLElement;
-                                const glowEl = card.querySelector('.card-glow') as HTMLElement;
-                                
-                                gsap.to(card, {
-                                    y: -8,
-                                    scale: 1.02,
-                                    background: 'rgba(255, 255, 255, 0.04)',
-                                    borderColor: `rgba(255, 255, 255, 0.15)`,
-                                    boxShadow: `0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px ${benefit.color}33`,
-                                    duration: 0.4,
-                                    ease: 'power2.out',
-                                });
-                                
-                                if (iconEl) {
-                                    gsap.to(iconEl, {
-                                        scale: 1.15,
-                                        y: -5,
-                                        rotation: 5,
-                                        boxShadow: `0 8px 20px ${benefit.color}40`,
+                                if (!isMobileView) {
+                                    const card = e.currentTarget;
+                                    const iconEl = card.querySelector('[data-icon]') as HTMLElement;
+                                    const glowEl = card.querySelector('.card-glow') as HTMLElement;
+                                    
+                                    gsap.to(card, {
+                                        y: -8,
+                                        scale: 1.02,
+                                        background: 'rgba(255, 255, 255, 0.04)',
+                                        borderColor: `rgba(255, 255, 255, 0.15)`,
+                                        boxShadow: `0 25px 50px rgba(37, 99, 235, 0.3), 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 2px ${benefit.color}50`,
                                         duration: 0.4,
                                         ease: 'power2.out',
                                     });
-                                }
-                                
-                                if (glowEl) {
-                                    gsap.to(glowEl, {
-                                        opacity: 0.4,
-                                        scale: 1.2,
-                                        duration: 0.4,
-                                    });
+                                    
+                                    if (iconEl) {
+                                        gsap.to(iconEl, {
+                                            scale: 1.15,
+                                            y: -5,
+                                            rotation: 5,
+                                            boxShadow: `0 8px 20px ${benefit.color}40`,
+                                            duration: 0.4,
+                                            ease: 'power2.out',
+                                        });
+                                    }
+                                    
+                                    if (glowEl) {
+                                        gsap.to(glowEl, {
+                                            opacity: 0.4,
+                                            scale: 1.2,
+                                            duration: 0.4,
+                                        });
+                                    }
                                 }
                             }}
                             onMouseLeave={(e) => {
-                                const card = e.currentTarget;
-                                const iconEl = card.querySelector('[data-icon]') as HTMLElement;
-                                const glowEl = card.querySelector('.card-glow') as HTMLElement;
-                                
-                                gsap.to(card, {
-                                    y: 0,
-                                    scale: 1,
-                                    background: 'rgba(255, 255, 255, 0.02)',
-                                    borderColor: 'rgba(255, 255, 255, 0.08)',
-                                    boxShadow: 'none',
-                                    duration: 0.4,
-                                    ease: 'power2.out',
-                                });
-                                
-                                if (iconEl) {
-                                    gsap.to(iconEl, {
-                                        scale: 1,
+                                if (!isMobileView) {
+                                    const card = e.currentTarget;
+                                    const iconEl = card.querySelector('[data-icon]') as HTMLElement;
+                                    const glowEl = card.querySelector('.card-glow') as HTMLElement;
+                                    
+                                    gsap.to(card, {
                                         y: 0,
-                                        rotation: 0,
+                                        scale: 1,
+                                        background: 'rgba(255, 255, 255, 0.02)',
+                                        borderColor: 'rgba(255, 255, 255, 0.08)',
                                         boxShadow: 'none',
                                         duration: 0.4,
                                         ease: 'power2.out',
                                     });
+                                    
+                                    if (iconEl) {
+                                        gsap.to(iconEl, {
+                                            scale: 1,
+                                            y: 0,
+                                            rotation: 0,
+                                            boxShadow: 'none',
+                                            duration: 0.4,
+                                            ease: 'power2.out',
+                                        });
+                                    }
+                                    
+                                    if (glowEl) {
+                                        gsap.to(glowEl, {
+                                            opacity: 0,
+                                            scale: 1,
+                                            duration: 0.4,
+                                        });
+                                    }
                                 }
-                                
-                                if (glowEl) {
-                                    gsap.to(glowEl, {
-                                        opacity: 0,
-                                        scale: 1,
-                                        duration: 0.4,
+                            }}
+                            onTouchStart={(e) => {
+                                if (isMobileView) {
+                                    const card = e.currentTarget;
+                                    gsap.to(card, {
+                                        scale: 0.98,
+                                        duration: 0.2,
+                                        ease: 'power2.out',
                                     });
+                                }
+                            }}
+                            onTouchEnd={(e) => {
+                                if (isMobileView) {
+                                    const card = e.currentTarget;
+                                    const iconEl = card.querySelector('[data-icon]') as HTMLElement;
+                                    
+                                    gsap.to(card, {
+                                        scale: 1,
+                                        duration: 0.3,
+                                        ease: 'back.out(1.7)',
+                                    });
+                                    
+                                    // Mobile tap animation
+                                    if (iconEl) {
+                                        gsap.to(iconEl, {
+                                            scale: 1.2,
+                                            rotation: 360,
+                                            duration: 0.5,
+                                            ease: 'back.out(2)',
+                                            yoyo: true,
+                                            repeat: 1,
+                                        });
+                                    }
                                 }
                             }}
                         >
@@ -320,9 +372,9 @@ const Benefits: FC = () => {
                                 <h3 
                                     data-title
                                     style={{
-                                        fontSize: 'clamp(1.25rem, 3vw, 1.5rem)',
-                                        fontWeight: 700,
-                                        marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
+                                        fontSize: 'clamp(1.375rem, 3.5vw, 1.75rem)',
+                                        fontWeight: 800,
+                                        marginBottom: 'clamp(0.875rem, 2.5vw, 1.25rem)',
                                         color: '#FFFFFF',
                                         letterSpacing: '-0.02em',
                                     }}
@@ -332,9 +384,10 @@ const Benefits: FC = () => {
                                 <p 
                                     data-description
                                     style={{
-                                        color: 'rgba(255, 255, 255, 0.75)',
-                                        lineHeight: 1.8,
-                                        fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
+                                        color: 'rgba(255, 255, 255, 0.85)',
+                                        lineHeight: 1.9,
+                                        fontSize: 'clamp(1rem, 2.25vw, 1.125rem)',
+                                        fontWeight: 400,
                                     }}
                                 >
                                     {benefit.description}
