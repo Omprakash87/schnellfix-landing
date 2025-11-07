@@ -149,10 +149,13 @@ const HowItWorks: FC = () => {
 
     return (
         <section ref={sectionRef} id="how-it-works" style={{
-            padding: 'clamp(6rem, 15vw, 12rem) clamp(1rem, 5vw, 40px)',
+            padding: isMobileView 
+                ? 'clamp(3rem, 8vw, 4rem) clamp(1rem, 4vw, 1.5rem)' 
+                : 'clamp(6rem, 15vw, 12rem) clamp(1rem, 5vw, 40px)',
             background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)',
             position: 'relative',
-            overflow: 'hidden',
+            overflow: 'visible',
+            minHeight: isMobileView ? 'auto' : '100vh',
         }}>
             <div style={{
                 maxWidth: '1200px',
@@ -161,7 +164,8 @@ const HowItWorks: FC = () => {
             }}>
                 <div style={{
                     textAlign: 'center',
-                    marginBottom: 'clamp(4rem, 10vw, 6rem)',
+                    marginBottom: isMobileView ? 'clamp(2rem, 6vw, 3rem)' : 'clamp(4rem, 10vw, 6rem)',
+                    padding: isMobileView ? '0 0.5rem' : '0',
                 }}>
                     <SmoothReveal direction="up" delay={0.1}>
                         <h2 style={{
@@ -196,8 +200,9 @@ const HowItWorks: FC = () => {
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: 'clamp(2rem, 5vw, 4rem)',
+                    gap: isMobileView ? 'clamp(1.5rem, 4vw, 2rem)' : 'clamp(2rem, 5vw, 4rem)',
                     position: 'relative',
+                    padding: isMobileView ? '0 0.25rem' : '0',
                 }}>
                     {steps.map((step, index) => (
                         <div key={index} style={{ position: 'relative' }}>
@@ -210,8 +215,8 @@ const HowItWorks: FC = () => {
                                     display: 'flex',
                                     flexDirection: isMobileView ? 'column' : 'row',
                                     alignItems: isMobileView ? 'center' : 'flex-start',
-                                    gap: isMobileView ? 'clamp(1.5rem, 4vw, 2rem)' : 'clamp(2rem, 4vw, 3rem)',
-                                    padding: 'clamp(1.5rem, 4vw, 3rem)',
+                                    gap: isMobileView ? 'clamp(1.25rem, 3vw, 1.5rem)' : 'clamp(2rem, 4vw, 3rem)',
+                                    padding: isMobileView ? 'clamp(1.25rem, 3vw, 1.75rem)' : 'clamp(1.5rem, 4vw, 3rem)',
                                     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(37, 99, 235, 0.02) 100%)',
                                     border: '1px solid rgba(255, 255, 255, 0.12)',
                                     borderRadius: '24px',
@@ -404,24 +409,27 @@ const HowItWorks: FC = () => {
                                     width: '100%',
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    gap: isMobileView ? '1.5rem' : '2rem',
+                                    gap: isMobileView ? 'clamp(1rem, 2vw, 1.25rem)' : '2rem',
+                                    textAlign: isMobileView ? 'center' : 'left',
                                 }}>
                                     <div>
                                         <h3 style={{
-                                            fontSize: 'clamp(1.625rem, 4.5vw, 2.25rem)',
+                                            fontSize: isMobileView ? 'clamp(1.375rem, 4vw, 1.75rem)' : 'clamp(1.625rem, 4.5vw, 2.25rem)',
                                             fontWeight: 800,
-                                            marginBottom: 'clamp(0.875rem, 2.5vw, 1.25rem)',
+                                            marginBottom: isMobileView ? 'clamp(0.75rem, 2vw, 1rem)' : 'clamp(0.875rem, 2.5vw, 1.25rem)',
                                             color: '#FFFFFF',
                                             letterSpacing: '-0.02em',
+                                            width: '100%',
                                         }}>
                                             {step.title}
                                         </h3>
                                         <p style={{
                                             color: 'rgba(255, 255, 255, 0.85)',
-                                            lineHeight: 1.9,
-                                            fontSize: 'clamp(1.0625rem, 2.75vw, 1.1875rem)',
-                                            maxWidth: '600px',
+                                            lineHeight: isMobileView ? 1.8 : 1.9,
+                                            fontSize: isMobileView ? 'clamp(1rem, 2.5vw, 1.125rem)' : 'clamp(1.0625rem, 2.75vw, 1.1875rem)',
+                                            maxWidth: isMobileView ? '100%' : '600px',
                                             fontWeight: 400,
+                                            width: '100%',
                                         }}>
                                             {step.description}
                                         </p>

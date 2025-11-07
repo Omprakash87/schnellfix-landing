@@ -154,9 +154,13 @@ const Benefits: FC = () => {
 
     return (
         <section ref={sectionRef} id="benefits" style={{
-            padding: 'clamp(6rem, 15vw, 12rem) clamp(1rem, 5vw, 40px)',
+            padding: isMobileView 
+                ? 'clamp(3rem, 8vw, 4rem) clamp(1rem, 4vw, 1.5rem)' 
+                : 'clamp(6rem, 15vw, 12rem) clamp(1rem, 5vw, 40px)',
             background: '#0F172A',
             position: 'relative',
+            overflow: 'visible',
+            minHeight: isMobileView ? 'auto' : '100vh',
         }}>
             <div style={{
                 maxWidth: '1400px',
@@ -164,7 +168,8 @@ const Benefits: FC = () => {
             }}>
                 <div style={{
                     textAlign: 'center',
-                    marginBottom: 'clamp(4rem, 10vw, 6rem)',
+                    marginBottom: isMobileView ? 'clamp(2rem, 6vw, 3rem)' : 'clamp(4rem, 10vw, 6rem)',
+                    padding: isMobileView ? '0 0.5rem' : '0',
                 }}>
                     <SmoothReveal direction="up" delay={0.1}>
                         <h2 style={{
@@ -202,8 +207,10 @@ const Benefits: FC = () => {
                     gridTemplateColumns: isMobileView 
                         ? '1fr' 
                         : 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
-                    gap: isMobileView ? 'clamp(1.25rem, 4vw, 2rem)' : 'clamp(1.5rem, 4vw, 2.5rem)',
-                    padding: isMobileView ? '0 0.5rem' : '0',
+                    gap: isMobileView ? 'clamp(1rem, 3vw, 1.5rem)' : 'clamp(1.5rem, 4vw, 2.5rem)',
+                    padding: isMobileView ? '0 0.25rem' : '0',
+                    width: '100%',
+                    maxWidth: '100%',
                 }}>
                     {benefits.map((benefit, index) => (
                         <div
@@ -212,16 +219,18 @@ const Benefits: FC = () => {
                                 benefitRefs.current[index] = el;
                             }}
                             style={{
-                                padding: 'clamp(2rem, 4vw, 3rem)',
+                                padding: isMobileView ? 'clamp(1.5rem, 3vw, 2rem)' : 'clamp(2rem, 4vw, 3rem)',
                                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(37, 99, 235, 0.02) 100%)',
                                 border: '1px solid rgba(255, 255, 255, 0.12)',
                                 borderRadius: '24px',
                                 boxShadow: '0 12px 40px rgba(37, 99, 235, 0.15), 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
                                 backdropFilter: 'blur(10px)',
                                 position: 'relative',
-                                overflow: 'hidden',
+                                overflow: 'visible',
                                 transition: 'all 0.3s ease',
                                 cursor: 'pointer',
+                                width: '100%',
+                                maxWidth: '100%',
                             }}
                             onMouseEnter={(e) => {
                                 if (!isMobileView) {
@@ -359,7 +368,7 @@ const Benefits: FC = () => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     color: benefit.color,
-                                    marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+                                    marginBottom: isMobileView ? 'clamp(1rem, 2.5vw, 1.5rem)' : 'clamp(1.5rem, 3vw, 2rem)',
                                     position: 'relative',
                                     zIndex: 1,
                                 }}
@@ -372,11 +381,12 @@ const Benefits: FC = () => {
                                 <h3 
                                     data-title
                                     style={{
-                                        fontSize: 'clamp(1.375rem, 3.5vw, 1.75rem)',
+                                        fontSize: isMobileView ? 'clamp(1.25rem, 3vw, 1.5rem)' : 'clamp(1.375rem, 3.5vw, 1.75rem)',
                                         fontWeight: 800,
-                                        marginBottom: 'clamp(0.875rem, 2.5vw, 1.25rem)',
+                                        marginBottom: isMobileView ? 'clamp(0.75rem, 2vw, 1rem)' : 'clamp(0.875rem, 2.5vw, 1.25rem)',
                                         color: '#FFFFFF',
                                         letterSpacing: '-0.02em',
+                                        width: '100%',
                                     }}
                                 >
                                     {benefit.title}
@@ -385,9 +395,10 @@ const Benefits: FC = () => {
                                     data-description
                                     style={{
                                         color: 'rgba(255, 255, 255, 0.85)',
-                                        lineHeight: 1.9,
-                                        fontSize: 'clamp(1rem, 2.25vw, 1.125rem)',
+                                        lineHeight: isMobileView ? 1.8 : 1.9,
+                                        fontSize: isMobileView ? 'clamp(0.9375rem, 2vw, 1.0625rem)' : 'clamp(1rem, 2.25vw, 1.125rem)',
                                         fontWeight: 400,
+                                        width: '100%',
                                     }}
                                 >
                                     {benefit.description}
